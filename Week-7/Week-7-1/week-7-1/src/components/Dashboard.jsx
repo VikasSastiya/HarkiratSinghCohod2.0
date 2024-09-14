@@ -1,5 +1,26 @@
+import { children } from "react"
+
 export default function Dashboard() {
     return <div>
         Dashboard Page
-    </div>
+      <Boldify>
+        hi there
+      </Boldify>
+      <Boldify>
+        hi there
+      </Boldify>
+
+      <Boldify>
+        hi there
+      </Boldify>
+      <Boldify>
+        hi there
+      </Boldify>
+    </div>   
+}
+
+function Boldify({children}) {
+    return <b>
+        {children}
+    </b>
 }
