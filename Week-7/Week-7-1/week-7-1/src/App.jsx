@@ -1,10 +1,12 @@
-
+import {lazy} from "react"
 import {useNavigate, BrowserRouter,Routes,Route } from 'react-router-dom'
 
-import {Dashboard} from './components/Dashboard'
-import {Landing} from './components/Landing'
+const Dashboard = lazy(()=> import('./components/Dashboard'))
+const Landing = lazy(()=> import('./components/Landing'))
 
 function App() {
+
+  // Suspense API
   return (
  <div>
      <BrowserRouter>
