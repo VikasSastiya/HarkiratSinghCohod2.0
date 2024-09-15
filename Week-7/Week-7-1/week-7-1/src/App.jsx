@@ -4,17 +4,24 @@ function App() {
   const [count,setCount]=useState(0);
   return (
  <div>
-     <Count count={count}/>
+     {/* <Count count={count}/> */}
      <Buttons count={count} setCount={setCount}/> 
     </div>
   )
 }
 
-function Count({count}) {
+function Count({count, setCount}) {
   return <div>
-    {count}
+    <CountRenderer count={count}/>
+    <Buttons count={count} setCount={setCount}/>
   </div>
 }
+
+ function CountRenderer({count}) {
+   return <div>
+    {count}
+   </div>
+ }
 
 function Buttons({count,setCount}) {
    return <div>
