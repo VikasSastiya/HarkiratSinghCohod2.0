@@ -1,38 +1,56 @@
-import {useState} from "react"
+import { useState, useContext } from "react";
+import { CountContext } from "./context";
 
+// reducer/useReducer
 function App() {
-  const [count,setCount]=useState(0);
+  const [count, setCount] = useState(0);
   return (
- <div>
-     {/* <Count count={count}/> */}
-     <Buttons count={count} setCount={setCount}/> 
+    // wrap anyone that wants to use the teleported value inside a provider
+    <div>
+      <CountContext.Provider value={count}>
+        <Count setCount={setCount} />
+      </CountContext.Provider>
     </div>
-  )
+  );
 }
 
-function Count({count, setCount}) {
-  return <div>
-    <CountRenderer count={count}/>
-    <Buttons count={count} setCount={setCount}/>
-  </div>
+function Count({ setCount }) {
+  return (
+    <div>
+      <CountRenderer />
+      <Buttons setCount={setCount} />
+    </div>
+  );
 }
 
- function CountRenderer({count}) {
-   return <div>
-    {count}
-   </div>
- }
-
-function Buttons({count,setCount}) {
-   return <div>
-      <button onClick={()=> {
-            setCount(count+1)
-         }}>Increase</button>
-
-      <button onClick={()=> {
-               setCount(count-1)
-      }}>Decrease</button>
-   </div>
+function CountRenderer() {
+  // Use the count value from CountContext
+  const count = useContext(CountContext);
+  return <div>{count}</div>;
 }
 
-export default App
+function Buttons({ setCount }) {
+  // Use the count value from CountContext
+  const count = useContext(CountContext);
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        Increase
+      </button>
+
+      <button
+        onClick={() => {
+          setCount(count - 1);
+        }}
+      >
+        Decrease
+      </button>
+    </div>
+  );
+}
+
+export default App;
